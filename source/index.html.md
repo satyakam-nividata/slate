@@ -1,20 +1,17 @@
 ---
 title: API Reference
 
-# language_tabs: # must be one of https://git.io/vQNgJ
-#  - shell
-
 toc_footers:
 
 includes:
 
 search: true
+
 ---
 
 # API Integration Document
 
-Each api call is an HTTP request. The name of the called function is path of the URL. A call to the function "CreateAccount" should like like this:
-[https://server.portal.chat/APIGate/Account/AccountGlobal/CreateAccount](https://server.portal.chat/APIGate/Account/AccountGlobal/CreateAccount)
+Each api call is an HTTP request. The name of the called function is path of the URL. A call to the function "CreateAccount" should like like this: [https://server.portal.chat/APIGate/Account/AccountGlobal/CreateAccount](https://server.portal.chat/APIGate/Account/AccountGlobal/CreateAccount)
 
 All parameters to the function can be passed either through the url or through the posted data. If the posted data is used to pass parameters it must be url encoded (the same why browsers encode form data).
 
@@ -26,9 +23,7 @@ All calls return JSON of an object that has exactly 3 properties:
 
 # Authentication
 
-All calls have one required common parameter: "AccessCode". It is string that validates your rights to access the API.
-For test purposes the current AccessCode is: "YOUR_API_KEY";
-If required we can support certificate signed calls, but maybe it will be pointless at this point.
+All calls have one required common parameter: "AccessCode". It is string that validates your rights to access the API. For test purposes the current AccessCode is: "YOUR_API_KEY"; If required we can support certificate signed calls, but maybe it will be pointless at this point.
 
 > To authorize, use this code:
 

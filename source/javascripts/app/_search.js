@@ -5,14 +5,14 @@
   'use strict';
 
   var content, searchResults;
-  var highlightOpts = { element: 'span', className: 'search-highlight' };
+  var highlightOpts = {element: 'span', className: 'search-highlight'};
   var searchDelay = 0;
   var timeoutHandle = 0;
 
   var index = new lunr.Index();
 
   index.ref('id');
-  index.field('title', { boost: 10 });
+  index.field('title', {boost: 10});
   index.field('body');
   index.pipeline.add(lunr.trimmer, lunr.stopWordFilter);
 
@@ -20,9 +20,9 @@
   $(bind);
 
   function populate() {
-    $('h1, h2').each(function() {
+    $('h1, h2, h3').each(function () {
       var title = $(this);
-      var body = title.nextUntil('h1, h2');
+      var body = title.nextUntil('h1, h2, h3');
       index.add({
         id: title.prop('id'),
         title: title.text(),
@@ -32,8 +32,9 @@
 
     determineSearchDelay();
   }
+
   function determineSearchDelay() {
-    if(index.tokenStore.length>5000) {
+    if (index.tokenStore.length > 5000) {
       searchDelay = 300;
     }
   }
@@ -42,16 +43,16 @@
     content = $('.content');
     searchResults = $('.search-results');
 
-    $('#input-search').on('keyup',function(e) {
-      var wait = function() {
-        return function(executingFunction, waitTime){
+    $('#input-search').on('keyup', function (e) {
+      var wait = function () {
+        return function (executingFunction, waitTime) {
           clearTimeout(timeoutHandle);
           timeoutHandle = setTimeout(executingFunction, waitTime);
         };
       }();
-      wait(function(){
+      wait(function () {
         search(e);
-      }, searchDelay );
+      }, searchDelay);
     });
   }
 
@@ -66,7 +67,7 @@
     if (event.keyCode === 27) searchInput.value = '';
 
     if (searchInput.value) {
-      var results = index.search(searchInput.value).filter(function(r) {
+      var results = index.search(searchInput.value).filter(function (r) {
         return r.score > 0.0001;
       });
 
